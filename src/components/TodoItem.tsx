@@ -1,4 +1,4 @@
-import { Check, CreditCard as Edit2, Trash2, Calendar } from 'lucide-react';
+import { Check, Edit2, Trash2, Calendar } from 'lucide-react';
 import type { Todo } from '../types';
 
 interface TodoItemProps {

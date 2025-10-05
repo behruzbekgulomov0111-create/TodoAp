@@ -56,11 +56,16 @@ export const Dashboard = () => {
   };
 
   const handleDeleteTodo = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this task?')) {
+      return;
+    }
+
     try {
       await apiService.deleteTodo(id);
       await loadData();
     } catch (err) {
       console.error('Delete error:', err);
+      setError('Failed to delete task. Please try again.');
     }
   };
 
@@ -70,6 +75,7 @@ export const Dashboard = () => {
       await loadData();
     } catch (err) {
       console.error('Toggle error:', err);
+      setError('Failed to update task. Please try again.');
     }
   };
 
