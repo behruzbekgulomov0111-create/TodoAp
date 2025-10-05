@@ -60,22 +60,32 @@ export const Dashboard = () => {
       return;
     }
 
+    setError('');
     try {
       await apiService.deleteTodo(id);
+      setTodos(todos.filter(todo => todo.id !== id));
       await loadData();
-    } catch (err) {
+    } catch (err: any) {
       console.error('Delete error:', err);
-      setError('Failed to delete task. Please try again.');
+      const errorMsg = err.response?.data?.detail || 'Failed to delete task. Please try again.';
+      setError(errorMsg);
+      setTimeout(() => setError(''), 5000);
     }
   };
 
   const handleToggleTodo = async (todo: Todo) => {
+    setError('');
+    setTodos(todos.map(t => t.id === todo.id ? { ...t, completed: !t.completed } : t));
+
     try {
       await apiService.updateTodo(todo.id, { completed: !todo.completed });
       await loadData();
-    } catch (err) {
+    } catch (err: any) {
       console.error('Toggle error:', err);
-      setError('Failed to update task. Please try again.');
+      setTodos(todos);
+      const errorMsg = err.response?.data?.detail || 'Failed to update task. Please try again.';
+      setError(errorMsg);
+      setTimeout(() => setError(''), 5000);
     }
   };
 

@@ -1,4 +1,4 @@
-import { Check, CreditCard as Edit2, Trash2, Calendar } from 'lucide-react';
+import { Check, Edit2, Trash2, Calendar } from 'lucide-react';
 import type { Todo } from '../types';
 
 interface TodoItemProps {
@@ -19,11 +19,7 @@ export const TodoItem = ({ todo, onToggle, onEdit, onDelete }: TodoItemProps) =>
       <div className="flex items-start gap-4">
         <button
           onClick={() => onToggle(todo)}
-          className={`flex-shrink-0 w-6 h-6 rounded-md border-2 flex items-center justify-center transition-all mt-1 ${
-            todo.completed
-              ? 'bg-red-600 border-red-600'
-              : 'border-gray-300 hover:border-red-600'
-          }`}
+          className={`flex-shrink-0 w-7 h-7 rounded-lg border-2 flex items-center justify-center transition-all ${todo.completed ? 'bg-red-600 border-red-600' : 'border-gray-400 hover:border-red-600 hover:bg-gray-50'}`}
         >
           {todo.completed && <Check className="w-4 h-4 text-white" />}
         </button>
@@ -52,7 +48,7 @@ export const TodoItem = ({ todo, onToggle, onEdit, onDelete }: TodoItemProps) =>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => onEdit(todo)}
             className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
